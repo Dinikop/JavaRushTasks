@@ -5,8 +5,8 @@ package com.javarush.task.task27.task2707;
 */
 public class Solution {
     public void someMethodWithSynchronizedBlocks(Object obj1, Object obj2) {
-        synchronized (obj1) {
-            synchronized (obj2) {
+        synchronized (obj2) {
+            synchronized (obj1) {
                 System.out.println(obj1 + " " + obj2);
             }
         }
@@ -14,7 +14,34 @@ public class Solution {
 
     public static boolean isNormalLockOrder(final Solution solution, final Object o1, final Object o2) throws Exception {
         //do something here
-        return false;
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (o1) {
+                    try {
+                        Thread.sleep(500);
+                        synchronized (o2){
+
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                solution.someMethodWithSynchronizedBlocks(o1, o2);
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+//        System.out.println(thread2.getState());
+        Thread.sleep(2000);
+        return !(thread2.getState().equals(Thread.State.BLOCKED));
     }
 
     public static void main(String[] args) throws Exception {
