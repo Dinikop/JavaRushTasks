@@ -29,3 +29,5 @@ hs_err_pid*
 *.png
 *.info
 out/*
+Test/*
+Files/*
