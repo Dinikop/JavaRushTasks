@@ -18,33 +18,12 @@ import java.util.zip.ZipOutputStream;
 
 class Test {
     public static void main(String[] args) {
-        Path pathOfZipFile = Paths.get("D:\\DEV\\JavaRushTasks\\Test\\test.zip");
-        Path pathPack = Paths.get("D:\\DEV\\JavaRushTasks\\Test\\equals\\wefwef.txt");
-        try (ZipOutputStream zos = new ZipOutputStream(Files.newOutputStream(pathOfZipFile));
-             InputStream is = Files.newInputStream(pathPack)) {
-            ZipEntry zipEntry = new ZipEntry(pathPack.toString());
-            zos.putNextEntry(zipEntry);
 
-            copyData(is, zos);
+        Path file = Paths.get("in3\\test.zip");
+        Path full = Paths.get("D:\\DEV\\JavaRushTasks\\Test\\in1\\in2\\", "in3\\test.zip");
 
-            zos.closeEntry();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void copyData(InputStream in, OutputStream out) throws Exception {
-
-        int bufferSize = in.available() > 64000 ? 64000 : in.available();
-        byte[] buffer = new byte[bufferSize];
-        while (in.available() > 0) {
-            if (in.available() < bufferSize) bufferSize = in.available();
-
-            in.read(buffer, 0, bufferSize);
-            out.write(buffer);
-        }
+        System.out.println(full);
+        System.out.println(full.getParent());
     }
 
 }
