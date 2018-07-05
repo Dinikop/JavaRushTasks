@@ -4,11 +4,14 @@ import com.javarush.task.task31.task3110.exception.PathIsNotFoundException;
 import com.javarush.task.task31.task3110.exception.WrongZipFileException;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -84,6 +87,41 @@ public class ZipFileManager {
         }
     }
 
+    public void removeFiles(List<Path> pathList) throws Exception {
+
+        if (!Files.isRegularFile(zipFile)) {
+            throw new WrongZipFileException();
+        }
+
+        Path tempFile = Files.createTempFile("temp", ".tmp");
+
+        try (ZipInputStream zipInputStream = new ZipInputStream(Files.newInputStream(zipFile));
+            ZipOutputStream zipOutputStream = new ZipOutputStream(Files.newOutputStream(tempFile))) {
+
+            ZipEntry zipEntry;
+
+            while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+                Path zipEntryPath = Paths.get(zipEntry.getName());
+                if (pathList.contains(zipEntryPath)) {
+                    ConsoleHelper.writeMessage("Удален файл " + zipEntry.getName());
+                }
+                else
+                {
+                    zipOutputStream.putNextEntry(zipEntry);
+                    copyData(zipInputStream, zipOutputStream);
+                }
+            }
+            zipOutputStream.closeEntry();
+        }
+        Files.delete(zipFile);
+        Files.move(tempFile, zipFile);
+
+    }
+
+    public void removeFile(Path path) throws Exception {
+        removeFiles(Collections.singletonList(path));
+    }
+
     public List<FileProperties> getFilesList() throws Exception {
         // Проверяем существует ли zip файл
         if (!Files.isRegularFile(zipFile)) {
@@ -130,4 +168,20 @@ public class ZipFileManager {
             out.write(buffer, 0, len);
         }
     }
+
+    //тестирование
+//    public static void main(String[] args) throws Exception {
+//        Path zipPath = Paths.get("D:\\DEV\\JavaRushTasks\\Test\\test1.zip");
+////        List<Path> list = new ArrayList<>();
+////        list.add(Paths.get("data.txt"));
+//
+//        ZipFileManager zipFileManager = new ZipFileManager(zipPath);
+//        zipFileManager.removeFile(Paths.get("data1.txt"));
+////        ZipInputStream zipInputStream = new ZipInputStream(Files.newInputStream(zipPath));
+////        ZipEntry zipEntry;
+////        while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+////            System.out.println(zipEntry.getName());
+////        }
+////
+//    }
 }
