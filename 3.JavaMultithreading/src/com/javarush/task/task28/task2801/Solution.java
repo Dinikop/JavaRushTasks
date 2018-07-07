@@ -17,11 +17,23 @@ public class Solution {
         /* output
         it's E1.C
         undefined
-        it's E2.D
+        it's E2.
          */
+
+//        System.out.println(E1.class.getFields()[1].);
     }
 
     public static void switchTest(Enum obj) {
         //add your code here
+        switch (obj.getClass().getSimpleName()) {
+            case "E1":
+                System.out.println("it's E1." + obj.name());
+                break;
+            case "E2":
+                System.out.println("it's E2." + obj.name());
+                break;
+            default:
+                System.out.println("undefined");
+        }
     }
 }
