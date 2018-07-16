@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -18,12 +20,37 @@ import java.util.zip.ZipOutputStream;
 
 class Test {
     public static void main(String[] args) {
+        System.out.println(new AmigoThreadFactory().getNumberFactory().get());
+        System.out.println(new AmigoThreadFactory().getNumberFactory().get());
+        System.out.println(new AmigoThreadFactory().getNumberFactory().get());
+        System.out.println(new AmigoThreadFactory().getNumberFactory().get());
 
-        Path file = Paths.get("in3\\test.zip");
-        Path full = Paths.get("D:\\DEV\\JavaRushTasks\\Test\\in1\\in2\\", "in3\\test.zip");
+    }
 
-        System.out.println(full);
-        System.out.println(full.getParent());
+
+
+
+    public static class AmigoThreadFactory implements ThreadFactory {
+
+        static AtomicInteger numberOfFactories = new AtomicInteger (1);
+
+        final AtomicInteger numberFactory;
+
+        public AmigoThreadFactory() {
+            numberFactory = new AtomicInteger(numberOfFactories.getAndIncrement());
+        }
+
+        @Override
+        public Thread newThread(Runnable r) {
+            Thread thread = new Thread();
+
+//            thread.setName(String.format("%s-pool-A-thread-B", Thread.currentThread().getThreadGroup().getName(), ));
+            return null;
+        }
+
+        public AtomicInteger getNumberFactory() {
+            return numberFactory;
+        }
     }
 
 }
