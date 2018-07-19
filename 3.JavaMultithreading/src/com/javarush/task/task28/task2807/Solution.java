@@ -8,8 +8,20 @@ import java.util.concurrent.TimeUnit;
 Знакомство с ThreadPoolExecutor
 */
 public class Solution {
+    private static int ID = 0;
+
     public static void main(String[] args) throws InterruptedException {
         //Add your code here
+        LinkedBlockingQueue<Runnable> queue = new LinkedBlockingQueue<>(10);
+
+        for (int i = 0; i < 10; i++) {
+            queue.add(() -> doExpensiveOperation(++ID));
+        }
+
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 5, 1000, TimeUnit.MILLISECONDS, queue);
+        executor.prestartAllCoreThreads();
+        executor.shutdown();
+        executor.awaitTermination(5 ,TimeUnit.SECONDS);
 
         /* output example
 pool-1-thread-2, localId=2
