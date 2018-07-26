@@ -14,7 +14,7 @@ public class View extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        
     }
 
     public void setController(Controller controller) {
