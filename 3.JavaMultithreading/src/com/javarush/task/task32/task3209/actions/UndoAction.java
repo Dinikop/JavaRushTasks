@@ -7,7 +7,11 @@ import java.awt.event.ActionEvent;
 
 public class UndoAction extends AbstractAction {
 
-    public UndoAction(View view) {}
+    private View view;
+
+    public UndoAction(View view) {
+        this.view = view;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
