@@ -39,6 +39,14 @@ public class View extends JFrame implements ActionListener {
         
     }
 
+    public boolean canRedo() {
+        return false;
+    }
+
+    public boolean canUndo() {
+        return false;
+    }
+
     public void init() {
         initGui();
 
