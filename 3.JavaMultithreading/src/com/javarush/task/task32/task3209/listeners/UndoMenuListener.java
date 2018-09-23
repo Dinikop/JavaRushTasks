@@ -20,14 +20,8 @@ public class UndoMenuListener implements MenuListener {
 
     @Override
     public void menuSelected(MenuEvent e) {
-        if (view.canUndo()) {
-            undoMenuItem.setEnabled(true);
-        }
-        else undoMenuItem.setEnabled(false);
-        if (view.canRedo()) {
-            undoMenuItem.setEnabled(true);
-        }
-        else redoMenuItem.setEnabled(false);
+        undoMenuItem.setEnabled(view.canUndo());
+        redoMenuItem.setEnabled(view.canRedo());
     }
 
     @Override
