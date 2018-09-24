@@ -30,4 +30,7 @@ public class Controller {
         System.exit(0);
     }
 
+    public HTMLDocument getDocument() {
+        return document;
+    }
 }
