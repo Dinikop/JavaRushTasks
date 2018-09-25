@@ -19,15 +19,19 @@ public class Controller {
         this.view = view;
     }
 
-    public void createNewDocument() {}
+    public void createNewDocument() {
+        view.selectHtmlTab();
+        resetDocument();
+        view.setTitle("HTML редактор");
+        view.resetUndo();
+        currentFile = null;
+    }
 
     public void openDocument() {}
 
     public void saveDocument() {}
 
     public void saveDocumentAs() {}
-
-    public void showAbout() {}
 
     public static void main(String[] args) {
         View view = new View();
@@ -39,7 +43,7 @@ public class Controller {
     }
 
     public void init() {
-
+        createNewDocument();
     }
 
     public void exit(){
