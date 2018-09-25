@@ -6,6 +6,8 @@ import javax.swing.text.html.HTMLEditorKit;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.concurrent.ExecutionException;
 
 public class Controller {
 
@@ -55,6 +57,19 @@ public class Controller {
         } catch (BadLocationException e) {
             ExceptionHandler.log(e);
         }
+    }
+
+    public String getPlainText() {
+        StringWriter stringWriter = new StringWriter();
+        HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
+        try {
+            htmlEditorKit.write(stringWriter, document, 0, document.getLength());
+        } catch (IOException e) {
+            ExceptionHandler.log(e);
+        } catch (BadLocationException e) {
+            ExceptionHandler.log(e);
+        }
+        return stringWriter.toString();
     }
 
     public HTMLDocument getDocument() {
