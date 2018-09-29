@@ -28,9 +28,11 @@ public class Solution {
             if (tryNumber > secret)
                 if (i < 10)
                     System.out.println("Загаданное число меньше");
-            if (tryNumber == secret)
+            if (tryNumber == secret) {
                 i = stopGame();
                 flagWin = true;
+                break;
+            }
         }
         if (flagWin)
             printCongratulations(tryNumber);
