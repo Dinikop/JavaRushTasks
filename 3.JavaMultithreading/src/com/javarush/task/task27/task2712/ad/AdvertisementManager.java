@@ -8,7 +8,8 @@ public class AdvertisementManager {
         this.timeSeconds = timeSeconds;
     }
 
-    public void processVideos() {
-        System.out.println("calling processVideos method");
+    public void processVideos() throws NoVideoAvailableException {
+        if (storage.list().isEmpty()) throw new NoVideoAvailableException();
+
     }
 }

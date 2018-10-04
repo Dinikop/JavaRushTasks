@@ -11,9 +11,7 @@ public class Restaurant {
         Waiter waiter = new Waiter();
         tablet.addObserver(cook);
         cook.addObserver(waiter);
-//        tablet.createOrder();
-//        tablet.createOrder();
-//        tablet.createOrder();
+
         tablet.createOrder();
 
 
