@@ -28,6 +28,13 @@ public class AdvertisementManager {
             makeCombination(validVideos.toArray(new Advertisement[0]), validVideos.size(), i);
         }
 
+//        //test-------------------------------------------------
+//        System.out.println("before sorting");
+//        allLists.forEach(x -> {
+//            x.forEach(y -> System.out.print(y.getName() + " | "));
+//            System.out.print(" durations " + x.stream().mapToInt(Advertisement::getDuration).sum() + "\n");
+//        });
+//        //test end --------------------------------------------
 
         allLists = allLists
                 .stream()
@@ -38,7 +45,14 @@ public class AdvertisementManager {
                 )
                 .collect(Collectors.toList());
 
-
+//        //test-------------------------------------------------
+//        System.out.println("\nafter sorting");
+//        allLists.forEach(x -> {
+//            x.forEach(y -> System.out.print(y.getName() + " | "));
+//            System.out.print(" durations " + x.stream().mapToInt(Advertisement::getDuration).sum() +
+//                    " " + "amount " + x.stream().mapToLong(Advertisement::getAmountPerOneDisplaying).sum() + "\n");
+//        });
+//        //test end --------------------------------------------
 
         List<Advertisement> listToShow = allLists.get(0);
 
@@ -57,6 +71,11 @@ public class AdvertisementManager {
 
 
     }
+//
+//    public static void main(String[] args) {
+//        AdvertisementManager advertisementManager = new AdvertisementManager(600);
+//        advertisementManager.processVideos();
+//    }
 
     /* arr[]  ---> Input Array
     data[] ---> Temporary array to store current combination
