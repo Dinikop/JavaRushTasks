@@ -28,30 +28,31 @@ public class AdvertisementManager {
             makeCombination(validVideos.toArray(new Advertisement[0]), validVideos.size(), i);
         }
 
-        //test-------------------------------------------------
-        System.out.println("before sorting");
-        allLists.forEach(x -> {
-            x.forEach(y -> System.out.print(y.getName() + " | "));
-            System.out.print(" durations " + x.stream().mapToInt(Advertisement::getDuration).sum() + "\n");
-        });
-        //test end --------------------------------------------
+//        //test-------------------------------------------------
+//        System.out.println("before sorting");
+//        allLists.forEach(x -> {
+//            x.forEach(y -> System.out.print(y.getName() + " | "));
+//            System.out.print(" durations " + x.stream().mapToInt(Advertisement::getDuration).sum() + "\n");
+//        });
+//        //test end --------------------------------------------
 
         allLists = allLists
                 .stream()
                 .filter(x -> x.stream().mapToInt(Advertisement::getDuration).sum() <= timeSeconds)
                 .sorted(Comparator.comparing((List<Advertisement> x) -> x.stream().mapToLong(Advertisement::getAmountPerOneDisplaying).sum()).reversed()
-                        .thenComparing(x -> x.stream().mapToInt(Advertisement::getDuration).sum())
+//                        .thenComparing(x -> x.stream().mapToInt(Advertisement::getDuration).sum())
                         .thenComparing(List::size)
                 )
                 .collect(Collectors.toList());
 
-        //test-------------------------------------------------
-        System.out.println("\nafter sorting");
-        allLists.forEach(x -> {
-            x.forEach(y -> System.out.print(y.getName() + " | "));
-            System.out.print(" durations " + x.stream().mapToInt(Advertisement::getDuration).sum() + "\n");
-        });
-        //test end --------------------------------------------
+//        //test-------------------------------------------------
+//        System.out.println("\nafter sorting");
+//        allLists.forEach(x -> {
+//            x.forEach(y -> System.out.print(y.getName() + " | "));
+//            System.out.print(" durations " + x.stream().mapToInt(Advertisement::getDuration).sum() +
+//                    " " + "amount " + x.stream().mapToLong(Advertisement::getAmountPerOneDisplaying).sum() + "\n");
+//        });
+//        //test end --------------------------------------------
 
         List<Advertisement> listToShow = allLists.get(0);
 
@@ -63,18 +64,18 @@ public class AdvertisementManager {
             System.out.println(x.getName()
                     + " is displaying... "
                     + x.getAmountPerOneDisplaying()
-                    + " "
+                    + ", "
                     + x.getAmountPerOneDisplaying() * 1000 / x.getDuration());
             x.revalidate();
         });
 
 
     }
-
-    public static void main(String[] args) {
-        AdvertisementManager advertisementManager = new AdvertisementManager(600);
-        advertisementManager.processVideos();
-    }
+//
+//    public static void main(String[] args) {
+//        AdvertisementManager advertisementManager = new AdvertisementManager(600);
+//        advertisementManager.processVideos();
+//    }
 
     /* arr[]  ---> Input Array
     data[] ---> Temporary array to store current combination

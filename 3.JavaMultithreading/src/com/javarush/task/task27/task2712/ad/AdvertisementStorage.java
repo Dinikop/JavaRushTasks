@@ -15,7 +15,7 @@ public class AdvertisementStorage {
 //        videos.add(new Advertisement(someContent, "Third Video", 400, 2, 10 * 60)); //10 min
         videos.add(new Advertisement(someContent, "first", 200, 30, 5 * 60)); //5 min
         videos.add(new Advertisement(someContent, "second", 200, 30, 5 * 60)); //6 min
-        videos.add(new Advertisement(someContent, "third", 200, 30, 10 * 60)); //7 min
+        videos.add(new Advertisement(someContent, "third", 200, 30, 4 * 60)); //7 min
         videos.add(new Advertisement(someContent, "fourth", 200, 30, 10 * 60)); //7 min
     }
 
