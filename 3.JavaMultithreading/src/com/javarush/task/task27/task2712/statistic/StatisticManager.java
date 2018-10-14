@@ -1,5 +1,6 @@
 package com.javarush.task.task27.task2712.statistic;
 
+import com.javarush.task.task27.task2712.ad.Advertisement;
 import com.javarush.task.task27.task2712.statistic.event.EventDataRow;
 import com.javarush.task.task27.task2712.statistic.event.EventType;
 
@@ -20,7 +21,9 @@ public class StatisticManager {
     private StatisticManager() {
     }
 
-    public void register(EventDataRow data){}
+    public void register(EventDataRow data){
+        statisticStorage.put(data);
+    }
 
     private class StatisticStorage {
 
@@ -33,6 +36,13 @@ public class StatisticManager {
                 storage.put(eventType, new ArrayList<>());
             }
 
+        }
+
+        private void put(EventDataRow data) {
+
+            List<EventDataRow> addList = storage.get(data.getType());
+            addList.add(data);
+            storage.put(data.getType(), addList);
         }
     }
 }

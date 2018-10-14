@@ -1,5 +1,8 @@
 package com.javarush.task.task27.task2712.ad;
 
+import com.javarush.task.task27.task2712.statistic.StatisticManager;
+import com.javarush.task.task27.task2712.statistic.event.VideoSelectedEventDataRow;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,14 +31,6 @@ public class AdvertisementManager {
             makeCombination(validVideos.toArray(new Advertisement[0]), validVideos.size(), i);
         }
 
-//        //test-------------------------------------------------
-//        System.out.println("before sorting");
-//        allLists.forEach(x -> {
-//            x.forEach(y -> System.out.print(y.getName() + " | "));
-//            System.out.print(" durations " + x.stream().mapToInt(Advertisement::getDuration).sum() + "\n");
-//        });
-//        //test end --------------------------------------------
-
         allLists = allLists
                 .stream()
                 .filter(x -> x.stream().mapToInt(Advertisement::getDuration).sum() <= timeSeconds)
@@ -45,20 +40,17 @@ public class AdvertisementManager {
                 )
                 .collect(Collectors.toList());
 
-//        //test-------------------------------------------------
-//        System.out.println("\nafter sorting");
-//        allLists.forEach(x -> {
-//            x.forEach(y -> System.out.print(y.getName() + " | "));
-//            System.out.print(" durations " + x.stream().mapToInt(Advertisement::getDuration).sum() +
-//                    " " + "amount " + x.stream().mapToLong(Advertisement::getAmountPerOneDisplaying).sum() + "\n");
-//        });
-//        //test end --------------------------------------------
-
         List<Advertisement> listToShow = allLists.get(0);
 
         Collections.sort(listToShow,
                 Comparator.comparing(Advertisement::getAmountPerOneDisplaying).reversed()
                 .thenComparing(x -> x.getAmountPerOneDisplaying() * 1000 / x.getDuration()));
+
+        StatisticManager.getInstance().register(new VideoSelectedEventDataRow(
+                listToShow,
+                listToShow.stream().mapToLong(Advertisement::getAmountPerOneDisplaying).sum(),
+                listToShow.stream().mapToInt(Advertisement::getDuration).sum()
+        ));
 
         listToShow.forEach(x -> {
             System.out.println(x.getName()
