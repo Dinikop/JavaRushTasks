@@ -14,7 +14,7 @@ public class Advertisement {
         this.initialAmount = initialAmount;
         this.hits = hits;
         this.duration = duration;
-        this.amountPerOneDisplaying = initialAmount / hits;
+        this.amountPerOneDisplaying = hits > 0 ? initialAmount / hits : 0;
     }
 
     public String getName() {
@@ -32,5 +32,9 @@ public class Advertisement {
     public void revalidate() {
         if (hits <= 0) throw new UnsupportedOperationException();
         hits--;
+    }
+
+    public int getHits() {
+        return hits;
     }
 }
