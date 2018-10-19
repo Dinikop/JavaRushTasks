@@ -2,9 +2,12 @@ package com.javarush.task.task27.task2712.statistic;
 
 import com.javarush.task.task27.task2712.ad.Advertisement;
 import com.javarush.task.task27.task2712.kitchen.Cook;
+import com.javarush.task.task27.task2712.statistic.event.CookedOrderEventDataRow;
 import com.javarush.task.task27.task2712.statistic.event.EventDataRow;
 import com.javarush.task.task27.task2712.statistic.event.EventType;
+import com.javarush.task.task27.task2712.statistic.event.VideoSelectedEventDataRow;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class StatisticManager {
@@ -48,5 +51,46 @@ public class StatisticManager {
             addList.add(data);
             storage.put(data.getType(), addList);
         }
+
+        public Map<EventType, List<EventDataRow>> getStorage() {
+            return Collections.unmodifiableMap(storage);
+        }
+    }
+
+    public Map<String, Long> getAdvertisementProfit() {
+        Map<String, Long> result = new TreeMap<>();
+
+        List<EventDataRow> videoSelectedEvents = statisticStorage.storage.get(EventType.SELECTED_VIDEOS);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+
+        for (EventDataRow eventDataRow :videoSelectedEvents) {
+            String date = simpleDateFormat.format(eventDataRow.getDate());
+            Long amount = ((VideoSelectedEventDataRow) eventDataRow).getAmount();
+            result.merge(date, amount, (k, v) -> v + amount);
+        }
+        return result;
+    }
+
+    public Map<String, Map<String, Integer>> getCookWorkloading() {
+
+        Map<String, Map<String, Integer>> result = new TreeMap<>();
+
+        List<EventDataRow> cookedOrders = statisticStorage.storage.get(EventType.COOKED_ORDER);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+
+        for (EventDataRow eventDataRow : cookedOrders) {
+            String date = simpleDateFormat.format(eventDataRow.getDate());
+            String cookName = ((CookedOrderEventDataRow) eventDataRow).getCookName();
+            int time = ((CookedOrderEventDataRow) eventDataRow).getTime();
+
+            Map<String, Integer> cookWorkTime = new TreeMap<>();
+            cookWorkTime.put(cookName, time);
+
+
+        }
+        return null;
+
     }
 }
