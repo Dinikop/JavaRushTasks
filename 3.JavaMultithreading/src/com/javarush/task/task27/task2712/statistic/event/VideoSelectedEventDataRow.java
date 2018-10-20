@@ -37,4 +37,8 @@ public class VideoSelectedEventDataRow implements EventDataRow {
     public int getTime() {
         return totalDuration;
     }
+
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
+    }
 }
