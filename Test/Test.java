@@ -10,7 +10,7 @@ public class Test {
 
     public int a;
     public static void main(String[] args) {
-        String s = "0x16F34";
-        System.out.println(s.substring(2));
+        Integer.parseInt("1AF");
+//        BigInteger bi = new BigInteger("1A");
     }
 }
