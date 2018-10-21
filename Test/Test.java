@@ -1,4 +1,5 @@
 import java.io.*;
+import java.math.BigInteger;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -9,8 +10,6 @@ public class Test {
 
     public int a;
     public static void main(String[] args) {
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-        System.out.println(simpleDateFormat.format(date));
+        System.out.println(new BigInteger(String.valueOf(10), 2));
     }
 }

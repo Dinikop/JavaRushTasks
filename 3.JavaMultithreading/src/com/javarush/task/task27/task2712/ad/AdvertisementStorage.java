@@ -10,13 +10,9 @@ public class AdvertisementStorage {
 
     private AdvertisementStorage() {
         Object someContent = new Object();
-        videos.add(new Advertisement(someContent, "First Video", 5000, 100, 3 * 60)); // 3 min)
-        videos.add(new Advertisement(someContent, "Second Video", 100, 10, 15 * 60)); //15 min)
-        videos.add(new Advertisement(someContent, "Third Video", 400, 2, 10 * 60)); //10 min
-        videos.add(new Advertisement(someContent, "first", 200, 30, 5 * 60)); //5 min
-        videos.add(new Advertisement(someContent, "second", 200, 30, 5 * 60)); //6 min
-        videos.add(new Advertisement(someContent, "third", 200, 30, 4 * 60)); //7 min
-        videos.add(new Advertisement(someContent, "fourth", 200, 30, 10 * 60)); //7 min
+        add(new Advertisement(someContent, "11", 350, 100, 3 * 60)); // 3 min
+        add(new Advertisement(someContent, "12", 1500, 10, 2 * 60)); //15 min
+        add(new Advertisement(someContent, "13", 4600, 2, 10 * 60));   //10 min
     }
 
     public static AdvertisementStorage getInstance() {
