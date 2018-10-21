@@ -10,6 +10,7 @@ public class Test {
 
     public int a;
     public static void main(String[] args) {
-        System.out.println(new BigInteger(String.valueOf(10), 2));
+        String s = "0x16F34";
+        System.out.println(s.substring(2));
     }
 }
