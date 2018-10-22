@@ -8,9 +8,9 @@ import java.util.Locale;
 
 public class Test {
 
-    public int a;
     public static void main(String[] args) {
-        Integer.parseInt("1AF");
-//        BigInteger bi = new BigInteger("1A");
+        for (int i = 32; i <=127 ; i++) {
+            System.out.println((char) i + " ascii code - " + i);
+        }
     }
 }
