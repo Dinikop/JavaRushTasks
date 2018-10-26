@@ -9,8 +9,9 @@ import java.util.Locale;
 public class Test {
 
     public static void main(String[] args) {
-        for (int i = 32; i <=127 ; i++) {
-            System.out.println((char) i + " ascii code - " + i);
-        }
+
+        int mask = 2147483392;
+        System.out.println(Integer.toString((255), 2));
+        System.out.println(Integer.toString((255 >> 1) & 255, 2));
     }
 }
