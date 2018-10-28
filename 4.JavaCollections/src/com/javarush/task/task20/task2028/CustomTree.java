@@ -91,7 +91,40 @@ public class CustomTree extends AbstractList<String> implements Cloneable, Seria
         return size - 1;
     }
 
-//    public void printTree() {
+    @Override
+    public boolean remove(Object o) {
+        String deletedItemName;
+        if(!(o instanceof String)) throw new UnsupportedOperationException();
+        else deletedItemName = (String) o;
+
+        Entry<String> top;
+
+        Queue<Entry<String>> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            top = queue.poll();
+            if (top.leftChild != null) {
+                if (top.leftChild.elementName.equals(deletedItemName)) {
+                    top.leftChild = null;
+                    return true;
+                }
+                queue.add(top.leftChild);
+            }
+            if (top.rightChild != null) {
+                if (top.rightChild.elementName.equals(deletedItemName)) {
+                    top.rightChild = null;
+                    return true;
+                }
+                queue.add(top.rightChild);
+            }
+
+        }
+
+        return false;
+    }
+
+//        public void printTree() {
 //        Entry<String> top;
 //
 //        Queue<Entry<String>> queue = new LinkedList<>();
@@ -128,10 +161,6 @@ public class CustomTree extends AbstractList<String> implements Cloneable, Seria
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public String remove(int index) {
-        throw new UnsupportedOperationException();
-    }
 
     @Override
     public boolean addAll(int index, Collection<? extends String> c) {

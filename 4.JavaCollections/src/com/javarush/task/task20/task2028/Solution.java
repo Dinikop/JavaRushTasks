@@ -10,9 +10,32 @@ public class Solution {
             list.add(String.valueOf(i));
         }
 
+//        System.out.println("=================sourse tree==================");
+//        ((CustomTree) list).printTree();
+//        System.out.println("==============================================");
 
         System.out.println("The list size is " + list.size());
         System.out.println("The expected parent is 3. The actual parent is " + ((CustomTree) list).getParent("8"));
         System.out.println("The expected parent is null. The actual parent is " + ((CustomTree) list).getParent("20"));
+
+        list.remove("3");
+        System.out.println("The expected parent is null. The actual parent is " + ((CustomTree) list).getParent("8"));
+
+//        System.out.println("=================resulting tree after removing 3==================");
+//        ((CustomTree) list).printTree();
+//        System.out.println("==================================================================");
+
+        list.add("16");
+        System.out.println("The expected parent is 9. The actual parent is " + ((CustomTree) list).getParent("16"));
+
+//        System.out.println("=================resulting tree after add 16==================");
+//        ((CustomTree) list).printTree();
+//        System.out.println("==================================================================");
+
+        list.remove("4");
+        list.remove("5");
+        list.remove("6");
+        System.out.println("Expected: true. Actual: " + list.add("20"));
+        System.out.println("The expected parent is 1. The actual parent is " + ((CustomTree) list).getParent("20"));
     }
 }
