@@ -5,13 +5,19 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Test {
 
     public static void main(String[] args) {
 
-        int mask = 2147483392;
-        System.out.println(Integer.toString((255), 2));
-        System.out.println(Integer.toString((255 >> 1) & 255, 2));
+        for (int i = 0; i < 20; i++) {
+            System.out.println(ThreadLocalRandom.current().nextInt(3));
+        }
+
+    }
+
+    private static char generateDigit() {
+        return (char) ThreadLocalRandom.current().nextInt(2);
     }
 }
